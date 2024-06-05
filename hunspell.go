@@ -7,7 +7,6 @@ type Hunspell struct {
 	affixPath         string
 	encoding          string
 	languageNum       int
-	utf8              bool
 	complexprefixes   bool
 	wordbreak         []string
 }
@@ -37,11 +36,6 @@ func NewHunspellKey(affPath, dPath, key string) *Hunspell {
 	tryString := affxMng.GetTryString()
 	encoding := affxMng.GetEncoding()
 	langnum := affxMng.GetLangNum()
-	utf8 := affxMng.GetUTF8()
-
-	if !utf8 {
-		csconv = GetCurrentCS(encoding)
-	}
 
 	complexPrefixes := affxMng.GetComplexPrefixes()
 	wordbreak := affxMng.GetBreaktable()
@@ -55,7 +49,6 @@ func NewHunspellKey(affPath, dPath, key string) *Hunspell {
 		affixPath:         affPath,
 		encoding:          encoding,
 		languageNum:       langnum,
-		utf8:              utf8,
 		complexprefixes:   complexPrefixes,
 		wordbreak:         wordbreak,
 	}
